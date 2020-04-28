@@ -3,8 +3,12 @@ import App from "./App.vue";
 import "./registerServiceWorker";
 import router from "./router";
 import store from "./store";
+import VCalendar from 'v-calendar';
+import  './components';
+import  './rules';
 
 Vue.config.productionTip = false;
+Vue.use(VCalendar);
 
 new Vue({
   router,
