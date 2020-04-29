@@ -44,14 +44,30 @@
         <div class="form-group row">
           <label for="inputName" class="col-sm-2 col-form-label">الاسم</label>
           <div class="col-sm-5">
-            <input type="text" class="form-control" id="inputName" />
+            <ValidationProvider
+              rules="required"
+              :bails="false"
+              v-slot="{ errors }"
+              name="الاسم"
+            >
+              <input
+                type="text"
+                class="form-control"
+                id="inputCode"
+                placeholder="الاسم"
+                v-model="inputName"
+              />
+              <ul class="error">
+                <li v-for="error in errors" :key="error">{{ error }}</li>
+              </ul>
+            </ValidationProvider>
           </div>
           <div class="col-sm-2">
             <ValidationProvider
               rules="required"
               :bails="false"
               v-slot="{ errors }"
-              name="الاسم"
+              name="اللغة"
             >
               <select class="form-control" v-model="name">
                 <option> الانجليزية</option>
@@ -75,16 +91,27 @@
             >نوع المجموعة</label
           >
           <div class="col-sm-8">
-            <select class="form-control">
-              <option> </option>
-            </select>
+            <ValidationProvider
+              rules="required"
+              :bails="false"
+              v-slot="{ errors }"
+              name="نوع المجموعة"
+            >
+              <select class="form-control" v-model="inputGroupType">
+                <option> فردي</option>
+                <option>زوجي</option>
+              </select>
+              <ul class="error">
+                <li v-for="error in errors" :key="error">{{ error }}</li>
+              </ul>
+            </ValidationProvider>
           </div>
         </div>
         <div class="form-group row">
           <label for="inputCode" class="col-sm-2 col-form-label">الكود </label>
           <div class="col-sm-8">
             <ValidationProvider
-              rules="required"
+              rules="required|numeric"
               :bails="false"
               v-slot="{ errors }"
               name="الكود"
@@ -104,12 +131,24 @@
         </div>
         <div class="form-group row">
           <label for="inputNationality" class="col-sm-2 col-form-label"
-            >الجنسية
-          </label>
+            >الجنسية</label
+          >
           <div class="col-sm-8">
-            <select class="form-control">
-              <option> افغانستان </option>
-            </select>
+            <ValidationProvider
+              rules="required"
+              :bails="false"
+              v-slot="{ errors }"
+              name="الجنسية"
+            >
+              <select class="form-control" v-model="inputNationality">
+                <option> افغانستان</option>
+                <option>الهند</option>
+                <option>مصر</option>
+              </select>
+              <ul class="error">
+                <li v-for="error in errors" :key="error">{{ error }}</li>
+              </ul>
+            </ValidationProvider>
           </div>
         </div>
         <div class="form-group row">
@@ -138,16 +177,34 @@
           </div>
         </div>
         <div class="form-group row">
-          <label for="inputSalesPerson" class="col-sm-2 col-form-label">
-            مندوب المبيعات</label
+          <label for="inputSalesPerson" class="col-sm-2 col-form-label"
+            >مندوب المبيعات</label
           >
           <div class="col-sm-8">
-            <input
+            <ValidationProvider
+              rules="required"
+              :bails="false"
+              v-slot="{ errors }"
+              name="مندوب المبيعات"
+            >
+              <input
+                type="text"
+                class="form-control"
+                id="inputSalesPerson"
+                placeholder="مندوب المبيعات"
+                v-model="inputSalesPerson"
+              />
+
+              <ul class="error">
+                <li v-for="error in errors" :key="error">{{ error }}</li>
+              </ul>
+            </ValidationProvider>
+            <!-- <input
               type="text"
               class="form-control"
               id="inputSalesPerson"
               placeholder="ادخل مندوب المبيعات"
-            />
+            /> -->
           </div>
         </div>
         <div class="form-group row">
@@ -155,10 +212,21 @@
             >العملة الافتراضية</label
           >
           <div class="col-sm-8">
-            <select class="form-control">
-              <option> درهم اماراتي</option>
-              <option>دولار امريكي</option>
-            </select>
+            <ValidationProvider
+              rules="required"
+              :bails="false"
+              v-slot="{ errors }"
+              name="العملة الافتراضية"
+            >
+              <select class="form-control" v-model="inputVirtualCurrency">
+                <option> درهم اماراتي</option>
+                <option>دولار امريكي</option>
+                <option>ريال سعودي</option>
+              </select>
+              <ul class="error">
+                <li v-for="error in errors" :key="error">{{ error }}</li>
+              </ul>
+            </ValidationProvider>
           </div>
         </div>
         <div class="form-group row">
@@ -166,10 +234,20 @@
             الجنس</label
           >
           <div class="col-sm-8">
-            <select class="form-control">
-              <option> ذكر</option>
-              <option>انثى </option>
-            </select>
+            <ValidationProvider
+              rules="required"
+              :bails="false"
+              v-slot="{ errors }"
+              name="الجنس"
+            >
+              <select class="form-control" v-model="gender">
+                <option> ذكر </option>
+                <option>انثى</option>
+              </select>
+              <ul class="error">
+                <li v-for="error in errors" :key="error">{{ error }}</li>
+              </ul>
+            </ValidationProvider>
           </div>
         </div>
         <div class="form-group row">
@@ -177,7 +255,18 @@
             تاريخ البداية</label
           >
           <div class="col-sm-8">
-            <date-picker v-model="date" />
+            <ValidationProvider
+              rules="required"
+              :bails="false"
+              v-slot="{ errors }"
+              name="تاريخ البداية"
+            >
+              <date-picker v-model="startDate" />
+              <ul class="error">
+                <li v-for="error in errors" :key="error">{{ error }}</li>
+              </ul>
+            </ValidationProvider>
+            <!-- <date-picker v-model="date" /> -->
           </div>
         </div>
         <div class="form-group row">
@@ -205,12 +294,32 @@ export default {
       yourValue: null, // Jan 25th, 2018
       inputTaxNumber: 0,
       inputCode: "",
+      inputName: "",
+      inputSalesPerson: "",
       name: "",
+      startDate: "",
+      gender: "",
+      inputVirtualCurrency: "",
+      inputNationality: "",
+      inputGroupType: "",
     };
   },
   methods: {
     onSubmit() {
       alert("Form has been submitted!");
+    },
+    reset() {
+      //this.inputNationality='';
+      (this.inputTaxNumber = ""),
+        (this.inputCode = ""),
+        (this.inputName = ""),
+        (this.inputSalesPerson = ""),
+        (this.name = ""),
+        (this.startDate = ""),
+        (this.gender = ""),
+        (this.inputVirtualCurrency = ""),
+        (this.inputNationality = ""),
+        (this.inputGroupType = "");
     },
   },
 };
